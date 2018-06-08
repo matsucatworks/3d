@@ -59,9 +59,13 @@
 
         obj.load('IronMan.obj',function(res){
             mat = res;
+            for(var val of res.children){
+                val.castShadow = true;
+            }
             res.position.set(400,0,0);
             res.castShadow = true;
             res.receiveShadow = true;
+            res.name = 'ironman';
             scene.add(res);
         });
     });
@@ -122,11 +126,17 @@
         // mesh.rotation.y += 0.01;
         if(mat){
             mat.rotation.y += 0.01;
+            mat.castShadow = true;
         }
+
         ctrl.update();
         renderer.render(scene,camera);
         requestAnimationFrame(load);
     };
+
+    setTimeout(()=>{
+        console.log(scene.children);
+    },5000);
 
     load();
 
